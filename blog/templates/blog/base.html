@@ -4,20 +4,53 @@
     <title>멋사</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa|Noto+Sans+KR&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+    <style>
+        body {
+            background-color: #ff679a;
+            font-family: 'Noto Sans KR', sans-serif;
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        #bigmain {
+            margin: 0 auto;
+            text-align: center;
+            background-color: white;
+            border-radius: 10px;
+            height: 100%;
+            width: 80%;
+            text-align: center;
+        }
+
+        #bloglink {
+            color: white;
+            font-size: 80px;
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container" style="text-align: center">
-            <br>
-        <div class="row">
-            <h1 class="col-6">이수지</h1>
-            <div class="col-6">
-                <a href="{% url 'accounts:signup'%}">Sign up</a>
-                <a href="{% url 'login'%}">Login</a>
+    <div>
+        <a href="{% url 'home' %}" id="bloglink" style="font-family: 'Comfortaa', cursive;">'blog'</a>
+    </div>
+    <div id="bigmain" style="padding:30px 50px 200px 50px;">
+            <div style="text-align: right;">
+                {%if user.is_active%}
+                <p>{{user.username}}님 반갑습니다.
+                    <a href="{% url 'logout'%}" class="btn" style="background-color:#ff679a; color: white;">logout</a>
+                </p>
+                {%else%}
+                <a href="{% url 'accounts:signup'%}" class="btn"
+                    style="background-color:#ff679a; color: white;">signup</a>
+                <a href="{% url 'login'%}" class="btn" style="background-color:#ff679a; color: white;">Login</a>
+                {%endif%}
             </div>
+            {% block content %}
+            {% endblock %}
         </div>
-        <br>
-        {% block content %}
-        {% endblock %}
     </div>
 </body>
